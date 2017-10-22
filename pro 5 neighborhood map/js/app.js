@@ -1,12 +1,12 @@
 
-var initMap=function(){
+function initMap(){
 
  map=new google.maps.Map(document.getElementById('mapview'),{
         center:{
-            lat:10.0725583,
-            lng:76.37658170000002
+            lat: 9.980092899999999,
+            lng:76.379904
         },
-        zoom:13
+        zoom:12
     });
 
 
