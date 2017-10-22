@@ -1,7 +1,7 @@
 
 var initMap=function(){
 
- map=new google.maps.Map(document.getElementById('map'),{
+ map=new google.maps.Map(document.getElementById('mapview'),{
         center:{
             lat:10.0725583,
             lng:76.37658170000002
@@ -12,4 +12,4 @@ var initMap=function(){
 
 
 };
-ko.applyBindings(new initMap());
+ko.applyBindings();
