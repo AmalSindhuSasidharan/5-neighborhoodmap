@@ -75,7 +75,7 @@ for(var i=0;i<this.places.length;i++){
           });
        this.markers.push(marker);
 }
-console.log(this.markers);
+
 
  // for(var i=0;i<locations.length;i++){
  //   var position = locations[i].location;
@@ -89,9 +89,15 @@ console.log(this.markers);
  //     id: i
  //          });
  //   markers.push(marker);
- //   // console.log(markers);
- // }
 
+ // }
+this.markerlist=ko.observableArray([]);
+
+locations.forEach(function(location){
+    self.markerlist.push(location);
+
+});
+    console.log(markerlist());
 
 
 
@@ -108,7 +114,7 @@ console.log(this.markers);
 //      // id: i
 //           });
 //    markers.push(marker);
-//    console.log(markers);
+
 // });
 
 
