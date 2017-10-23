@@ -47,8 +47,8 @@ var locations=[
 
 var initMap=function(){
 
-    var self =this;
 
+// added map to page
 
  map=new google.maps.Map(document.getElementById('mapview'),{
         center:{
@@ -60,62 +60,62 @@ var initMap=function(){
 
 
 
-this.places=locations;
 
-for(var i=0;i<this.places.length;i++){
-    this.position = this.places[i].location;
-    this.title = this.places[i].title;
-    console.log(this.title);
-    this. marker = new google.maps.Marker({
-         map: map,
-         position: position,
-         title: title,
-         animation: google.maps.Animation.DROP,
-         id: i
+// Style the markers a bit. This will be our listing marker icon.
+    var defaultIcon = makeMarkerIcon('0091ff');
+        // Create a "highlighted location" marker color for when the user
+        // mouses over the marker.
+    var highlightedIcon = makeMarkerIcon('FFFF24');
+    // This function takes in a COLOR, and then creates a new marker
+      // icon of that color. The icon will be 21 px wide by 34 high, have an origin
+      // of 0, 0 and be anchored at 10, 34).
+    function makeMarkerIcon(markerColor) {
+        var markerImage = new google.maps.MarkerImage(
+          'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
+          '|40|_|%E2%80%A2',
+          new google.maps.Size(21, 34),
+          new google.maps.Point(0, 0),
+          new google.maps.Point(10, 34),
+          new google.maps.Size(21,34));
+        return markerImage;
+      }
+
+
+
+ for(var i=0;i<locations.length;i++){
+   var position = locations[i].location;
+   var title = locations[i].title;
+
+   var marker = new google.maps.Marker({
+     map: map,
+     position: position,
+     title: title,
+     animation: google.maps.Animation.DROP,
+     icon: defaultIcon,
+     id: i
           });
-       this.markers.push(marker);
-}
+   markers.push(marker);
 
 
- // for(var i=0;i<locations.length;i++){
- //   var position = locations[i].location;
- //   var title = locations[i].title;
-
- //   var marker = new google.maps.Marker({
- //     map: map,
- //     position: position,
- //     title: title,
- //     animation: google.maps.Animation.DROP,
- //     id: i
- //          });
- //   markers.push(marker);
-
- // }
-this.markerlist=ko.observableArray([]);
-
-locations.forEach(function(location){
-    self.markerlist.push(location);
-
-});
-    console.log(markerlist());
+       // Two event listeners - one for mouseover, one for mouseout,
+          // to change the colors back and forth.
+        marker.addListener("mouseover",function(){
+            this.setIcon(highlightedIcon);
+        });
+        marker.addListener("mouseout",function(){
+            this.setIcon(defaultIcon);
+        });
+    }
 
 
 
 
-// locations.forEach(function(markerdetails){
-//     var position=locations.location;
-//     var title=locations.title;
 
-//     var marker = new google.maps.Marker({
-//      map: map,
-//      position: position,
-//      title: title,
-//      animation: google.maps.Animation.DROP,
-//      // id: i
-//           });
-//    markers.push(marker);
 
-// });
+
+
+
+
 
 
 
