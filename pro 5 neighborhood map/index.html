@@ -6,7 +6,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
+       <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/lib/knockout-3.2.0.js"></script>
+
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
 
 
 <style>
@@ -30,12 +34,12 @@
         position: absolute;
         right: 0px;
       }
-      hr {
+/*      hr {
         background: #D0D7D9;
         height: 1px;
         margin: 20px 0 20px 0;
         border: none;
-      }
+      }*/
 
 </style>
 </head>
@@ -47,9 +51,11 @@
             </div>
 
 
-            <div class="col-md-4" data-bind="foreach:markers">
+            <div class="col-md-4">
+             <div data-bind="foreach:markers">
                 <div data-bind="text:title"></div>
-                <hr>
+                <!-- <hr> -->
+            </div>
             </div>
         </div>
 
@@ -58,8 +64,6 @@
 
 
 
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/lib/knockout-3.2.0.js"></script>
 
 
 

@@ -42,7 +42,7 @@ var locations=[
 // var markers = [];
 
 
-    var markers = [];
+    var markers = ko.observableArray();
 
 
 var initMap=function(){
@@ -94,7 +94,7 @@ var initMap=function(){
      icon: defaultIcon,
      id: i
           });
-   markers.push(marker);
+   this.markers.push(marker);
 
 
        // Two event listeners - one for mouseover, one for mouseout,
@@ -106,6 +106,7 @@ var initMap=function(){
             this.setIcon(defaultIcon);
         });
     }
+console.log(markers);
 
 
 
