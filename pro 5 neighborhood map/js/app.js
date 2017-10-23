@@ -16,8 +16,8 @@ var locations=[
                     location:{lat:9.9533481,lng:76.3408252}
                  },
                  {
-                    title:"Vijaya Kumara Menon Hospital",
-                    location:{lat:9.9526027,lng:76.3407021}
+                    title:"Govt. Ayurveda Hospital",
+                    location:{lat:9.9248246,lng:76.3586416}
                  },
                  {
                     title:"Vyttila Mobility Hub",
@@ -28,15 +28,27 @@ var locations=[
                     location:{lat:9.9518318,lng:76.3404544}
                  },
                  {
+                    title:"Wonderla",
+                    location:{lat:10.027077,lng:76.39163}
+                 },
+                 {
                     title:"LuLu Mall",
                     location:{lat:10.0270753,lng:76.3080901}
                  }
+
                  ];
 
 
-var markers = [];
+// var markers = [];
+
+
+    var markers = [];
+
 
 var initMap=function(){
+
+    var self =this;
+
 
  map=new google.maps.Map(document.getElementById('mapview'),{
         center:{
@@ -46,20 +58,58 @@ var initMap=function(){
         zoom:12
     });
 
- for(var i=0;i<locations.length;i++){
 
-   var position = locations[i].location;
-   var title = locations[i].title;
 
-   var marker = new google.maps.Marker({
-     map: map,
-     position: position,
-     title: title,
-     animation: google.maps.Animation.DROP,
-     id: i
+this.places=locations;
+
+for(var i=0;i<this.places.length;i++){
+    this.position = this.places[i].location;
+    this.title = this.places[i].title;
+    console.log(this.title);
+    this. marker = new google.maps.Marker({
+         map: map,
+         position: position,
+         title: title,
+         animation: google.maps.Animation.DROP,
+         id: i
           });
-   // markers.push(marker);
- }
+       this.markers.push(marker);
+}
+console.log(this.markers);
+
+ // for(var i=0;i<locations.length;i++){
+ //   var position = locations[i].location;
+ //   var title = locations[i].title;
+
+ //   var marker = new google.maps.Marker({
+ //     map: map,
+ //     position: position,
+ //     title: title,
+ //     animation: google.maps.Animation.DROP,
+ //     id: i
+ //          });
+ //   markers.push(marker);
+ //   // console.log(markers);
+ // }
+
+
+
+
+
+// locations.forEach(function(markerdetails){
+//     var position=locations.location;
+//     var title=locations.title;
+
+//     var marker = new google.maps.Marker({
+//      map: map,
+//      position: position,
+//      title: title,
+//      animation: google.maps.Animation.DROP,
+//      // id: i
+//           });
+//    markers.push(marker);
+//    console.log(markers);
+// });
 
 
 
