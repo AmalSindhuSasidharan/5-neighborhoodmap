@@ -53,8 +53,8 @@
 
             <div class="col-md-4">
              <div data-bind="foreach:markers">
-                <div data-bind="text:title,click:marker.listClick"></div>
-                <!-- <hr> -->
+                <button data-bind="text:title,click:this.listclick"></button>
+                <br>
             </div>
             </div>
         </div>

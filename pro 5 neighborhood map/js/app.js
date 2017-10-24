@@ -112,10 +112,7 @@ function makeMarkerIcon(markerColor) {
         marker.addListener("mouseout",function(){
             this.setIcon(defaultIcon);
         });
-        // function called by list clicking
-        marker.listClick(this){
-        console.log("haaai just checking the link");
-        };
+
 
 }
 
@@ -142,6 +139,12 @@ function populateInfoWindow(marker, infowindow) {
 
 
             }
+};
+this.listclick=function(marker){
+    populateInfoWindow(marker, largeInfowindow);
+    makeBounce(marker);
+    console.log(marker);
+
 };
 
 
