@@ -39,14 +39,17 @@ var locations=[
                  ];
 
 
-// var markers = [];
-
 
     var markers = ko.observableArray();
 
 
+
+
 var initMap=function(){
 
+
+
+var largeInfowindow = new google.maps.InfoWindow();
 
 // added map to page
 
@@ -56,7 +59,7 @@ var initMap=function(){
             lng:76.379904
         },
         zoom:12
-    });
+});
 
 
 
@@ -69,7 +72,7 @@ var initMap=function(){
     // This function takes in a COLOR, and then creates a new marker
       // icon of that color. The icon will be 21 px wide by 34 high, have an origin
       // of 0, 0 and be anchored at 10, 34).
-    function makeMarkerIcon(markerColor) {
+function makeMarkerIcon(markerColor) {
         var markerImage = new google.maps.MarkerImage(
           'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
           '|40|_|%E2%80%A2',
@@ -78,7 +81,7 @@ var initMap=function(){
           new google.maps.Point(10, 34),
           new google.maps.Size(21,34));
         return markerImage;
-      }
+};
 
 
 
@@ -94,9 +97,13 @@ var initMap=function(){
      icon: defaultIcon,
      id: i
           });
-   this.markers.push(marker);
+     markers.push(marker);
 
-
+   // Create an onclick event to open the large infowindow at each marker and make it bounce .
+        marker.addListener('click', function() {
+        populateInfoWindow(this, largeInfowindow);
+        makeBounce(this);
+        });
        // Two event listeners - one for mouseover, one for mouseout,
           // to change the colors back and forth.
         marker.addListener("mouseover",function(){
@@ -105,8 +112,40 @@ var initMap=function(){
         marker.addListener("mouseout",function(){
             this.setIcon(defaultIcon);
         });
-    }
-console.log(markers);
+        // function called by list clicking
+        marker.listClick(this){
+        console.log("haaai just checking the link");
+        };
+
+}
+
+
+        // bounce marker when click on it
+
+function makeBounce(marker){
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function(){marker.setAnimation(null);},700);
+  };
+
+
+function populateInfoWindow(marker, infowindow) {
+        // Check to make sure the infowindow is not already opened on this marker.
+        if (infowindow.marker != marker) {
+          infowindow.marker = marker;
+          infowindow.setContent('<div>' + marker.title + '</div>');
+          infowindow.open(map, marker);
+
+          // Make sure the marker property is cleared if the infowindow is closed.
+          infowindow.addListener('closeclick', function() {
+            infowindow.marker = null;
+          });
+
+
+            }
+};
+
+
+
 
 
 
