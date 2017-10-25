@@ -213,12 +213,12 @@ this.listclick=function(marker){
 //         }
 //     };
 
+    var searchTerm = ko.observableArray();
 
-
-this.searchTerm = ko.observable("");
+// this.searchTerm = ko.observable("");
 
 this.filteredList = ko.computed(function() {
-    var filter = self.searchTerm().toLowerCase();
+    var filter = searchTerm().toLowerCase();
     if (!filter) {
         self.markers().forEach(function(locationItem){
             locationItem.visible(true);

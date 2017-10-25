@@ -56,13 +56,13 @@
              <div>
                  <!-- <input type="text" placeholder="search here please...." data-bind="value:this.inputText, valueUpdate: 'afterkeydown',event:{keyup:this.filtersearch}"> -->
 
-                 <input type="text" placeholder="search here please...." data-bind="textInput: searchTerm,valueUpdate: 'afterkeydown'">
+                 <input type="text" placeholder="search here please...." data-bind="textInput: this.searchTerm,valueUpdate: 'afterkeydown'">
              </div>
              <!-- <div data-bind="foreach:markers">
                 <div data-bind="text:title,click:this.listclick"></div>
                 <br>
             </div> -->
-            <div data-bind="foreach:filteredList">
+            <div data-bind="foreach:this.filteredList">
                 <div data-bind="text:title,click:this.listclick"></div>
                 <br>
             </div>
