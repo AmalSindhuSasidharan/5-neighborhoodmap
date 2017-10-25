@@ -91,6 +91,8 @@ var initMap=function(){
 
 var ViewModel =function() {
 
+    var self=this;
+
      var markers = ko.observableArray();
 
      var largeInfowindow = new google.maps.InfoWindow();
@@ -127,7 +129,8 @@ function makeMarkerIcon(markerColor) {
      animation: google.maps.Animation.DROP,
      icon: defaultIcon,
      id: i,
-     visible:true
+     // visible:true
+
 
 
           });
@@ -238,24 +241,24 @@ console.log(markers());
 
 // this.searchTerm = ko.observable("");
 
-this.filteredList = ko.computed(function() {
-    var filter = searchTerm().toLowerCase();
+ViewModel.filteredList = ko.computed(function() {
+    var filter =searchTerm().toString().toLowerCase();
     if (!filter) {
-        self.markers().forEach(function(locationItem){
+        markers().forEach(function(locationItem){
             locationItem.visible(true);
             });
-        return self.markers();
+        return markers();
     } else {
-        return ko.utils.arrayFilter(self.markers(), function(locationItem) {
+        return ko.utils.arrayFilter(this.markers(), function(locationItem) {
             var string = locationItem.title.toLowerCase();
             var result = (string.search(filter) >= 0);
             locationItem.visible(result);
-            // console.log(locationItem.visible());
+            console.log(locationItem.visible);
             return result;
         });
     }
-}, self);
-    console.log(this.filteredList());
+}, ViewModel);
+    console.log(ViewModel.filteredList());
 
 
 
