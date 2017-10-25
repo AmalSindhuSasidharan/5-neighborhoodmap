@@ -2,48 +2,57 @@ var locations=[
                 {
                     title:"Hill Palace Museum",
                     location:{lat:9.9526386,lng:76.3639139},
-                    show: true
+                    show: true,
+                    visible:true
                  },
                  {
                     title:"Hindutemple Sree Poornathrayeesa temple",
                     location:{lat:9.9450109,lng:76.342111},
-                    show: true
+                    show: true,
+                    visible:true
 
                  },
                  {
                     title:"RLV College of Fine Arts",
                     location:{lat:9.9422187,lng:76.3449798},
-                    show: true
+                    show: true,
+                    visible:true
                  },
                  {
                     title:"Vegetarisches Sree Saravana Bhavan",
                     location:{lat:9.9533481,lng:76.3408252},
-                    show: true
+                    show: true,
+                    visible:true
                  },
                  {
                     title:"Govt. Ayurveda Hospital",
                     location:{lat:9.9248246,lng:76.3586416},
-                    show: true
+                    show: true,
+                    visible:true
                  },
                  {
                     title:"Vyttila Mobility Hub",
                     location:{lat:9.9686167,lng:76.3214095},
-                    show: true
+                    show: true,
+                    visible:true
                  },
                  {
                     title:"State Bank Of India",
                     location:{lat:9.9518318,lng:76.3404544},
-                    show: true
+                    show: true,
+                    visible:true
                  },
                  {
                     title:"Wonderla",
                     location:{lat:10.027077,lng:76.39163},
-                    show: true
+                    show: true,
+                    visible:true
                  },
                  {
                     title:"LuLu Mall",
                     location:{lat:10.0270753,lng:76.3080901},
-                    show: true
+                    show: true,
+                    visible:true
                  }
 
                  ];
@@ -56,6 +65,7 @@ var locations=[
 
 
 var initMap=function(){
+    var self=this;
 
 
 
@@ -106,8 +116,15 @@ function makeMarkerIcon(markerColor) {
      animation: google.maps.Animation.DROP,
      icon: defaultIcon,
      id: i,
-     show: ko.observable(true)
+     visible:true
+
+
           });
+   marker.visible = ko.observable(true);
+
+
+
+
      markers.push(marker);
 
    // Create an onclick event to open the large infowindow at each marker and make it bounce .
@@ -157,44 +174,67 @@ this.listclick=function(marker){
 
 };
 
+// console.log(markers()[0]);
+// console.log(markers());
+
+
+//     // function for search bar
+//     this.inputText = ko.observable('');
+//     this.filtersearch = function(){
+//         largeInfowindow.close(); // close all the info window that are previously opened window
+//         var inputSearch = this.inputText();
+//         if (inputSearch.length === 0){
+//             this.showAll(true);
+//             // markers()[i].setMap(map);
+//         }
+//         else{
+//             console.log("haai");
+//             for(i=0; i< markers().length; i++){
+//                 if (markers()[i].title.toLowerCase().indexOf(inputSearch.toLowerCase()) > -1){
+//                     markers()[i].show(true);
+//                     markers()[i].setMap(null);
+//                     // markers[i].setVisible(true);
+//                     console.log(markers()[i].title);
+//                   }
+//                 else{
+//                     markers()[i].show(false);
+//                     // markers[i].setVisible(false);
+//                 }
+//             }
+//         }
+//         largeInfowindow.close();
+//     };
+
+//     this.showAll = function(variable){
+//         for(i=0; i<markers().length; i++){
+//             markers()[i].show(variable);
+//             // markers[i].setVisible(variable);
+//             console.log("hooi");
+//         }
+//     };
 
 
 
-    // function for search bar
-    this.inputText = ko.observable('');
-    this.filtersearch = function(){
-        largeInfowindow.close(); // close all the info window that are previously opened window
-        var inputSearch = this.inputText();
-        if (inputSearch.length === 0){
-            this.showAll(true);
-        }
-        else{
-            console.log("haai");
-            for(i=0; i< markers.length; i++){
-                if (markers[i].title.toLowerCase().indexOf(inputSearch.toLowerCase()) > -1){
-                    markers[i].show(true);
-                    // markers[i].setVisible(true);
-                }
-                else{
-                    markers[i].show(false);
-                    // markers[i].setVisible(false);
-                }
-            }
-        }
-        largeInfowindow.close();
-    };
+this.searchTerm = ko.observable("");
 
-    this.showAll = function(variable){
-        for(i=0; i<markers.length; i++){
-            markers[i].show(variable);
-            // markers[i].setVisible(variable);
-        }
-    };
-
-
-
-
-
+this.filteredList = ko.computed(function() {
+    var filter = self.searchTerm().toLowerCase();
+    if (!filter) {
+        self.markers().forEach(function(locationItem){
+            locationItem.visible(true);
+            });
+        return self.markers();
+    } else {
+        return ko.utils.arrayFilter(self.markers(), function(locationItem) {
+            var string = locationItem.title.toLowerCase();
+            var result = (string.search(filter) >= 0);
+            locationItem.visible(result);
+            // console.log(locationItem.visible());
+            return result;
+        });
+    }
+}, self);
+    console.log(this.filteredList());
 
 
 
