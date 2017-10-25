@@ -54,12 +54,17 @@
             <div class="col-md-4">
              <div><strong>NEIGHBORHOOD MAP</strong></div><br><br>
              <div>
-                 <!-- <input type="text" placeholder="search here please...." data-bind="value:this.inputText, valueUpdate: 'afterkeydown',event:{keyup:this.filtersearch}"> -->
+             <div>
+                <!--  <input type="text" placeholder="search here please...." data-bind="value:this.inputText, valueUpdate: 'afterkeydown',event:{keyup:this.filtersearch}">
+                 </div>
+ -->
+
+
 
                  <input type="text" placeholder="search here please...." data-bind="textInput: this.searchTerm,valueUpdate: 'afterkeydown'">
              </div>
              <!-- <div data-bind="foreach:markers">
-                <div data-bind="text:title,click:this.listclick"></div>
+                <div data-bind="text:title"></div>
                 <br>
             </div> -->
             <div data-bind="foreach:this.filteredList">

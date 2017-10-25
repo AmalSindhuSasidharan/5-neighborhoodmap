@@ -59,20 +59,14 @@ var locations=[
 
 
 
-    var markers = ko.observableArray();
+
 
 
 
 
 var initMap=function(){
     var self=this;
-
-
-
-var largeInfowindow = new google.maps.InfoWindow();
-
 // added map to page
-
  map=new google.maps.Map(document.getElementById('mapview'),{
         center:{
             lat: 9.980092899999999,
@@ -81,8 +75,25 @@ var largeInfowindow = new google.maps.InfoWindow();
         zoom:12
 });
 
+ ko.applyBindings(new ViewModel());
+
+};
 
 
+
+
+
+
+
+
+
+
+
+var ViewModel =function() {
+
+     var markers = ko.observableArray();
+
+     var largeInfowindow = new google.maps.InfoWindow();
 
 // Style the markers a bit. This will be our listing marker icon.
     var defaultIcon = makeMarkerIcon('0091ff');
@@ -168,50 +179,60 @@ function populateInfoWindow(marker, infowindow) {
 
             }
 };
-this.listclick=function(marker){
+function listclick(marker){
     populateInfoWindow(marker, largeInfowindow);
     makeBounce(marker);
 
 };
 
-// console.log(markers()[0]);
-// console.log(markers());
+console.log(markers()[0]);
+console.log(markers());
 
 
-//     // function for search bar
-//     this.inputText = ko.observable('');
-//     this.filtersearch = function(){
-//         largeInfowindow.close(); // close all the info window that are previously opened window
-//         var inputSearch = this.inputText();
-//         if (inputSearch.length === 0){
-//             this.showAll(true);
-//             // markers()[i].setMap(map);
-//         }
-//         else{
-//             console.log("haai");
-//             for(i=0; i< markers().length; i++){
-//                 if (markers()[i].title.toLowerCase().indexOf(inputSearch.toLowerCase()) > -1){
-//                     markers()[i].show(true);
-//                     markers()[i].setMap(null);
-//                     // markers[i].setVisible(true);
-//                     console.log(markers()[i].title);
-//                   }
-//                 else{
-//                     markers()[i].show(false);
-//                     // markers[i].setVisible(false);
-//                 }
-//             }
-//         }
-//         largeInfowindow.close();
-//     };
+    // // function for search bar
+    // this.inputText = ko.observable('');
+    // this.filtersearch = function(){
+    //     largeInfowindow.close(); // close all the info window that are previously opened window
+    //     var inputSearch = this.inputText();
+    //     if (inputSearch.length === 0){
+    //         this.showAll(true);
+    //         // markers()[i].setMap(map);
+    //     }
+    //     else{
+    //         console.log("haai");
+    //         for(i=0; i< markers().length; i++){
+    //             if (markers()[i].title.toLowerCase().indexOf(inputSearch.toLowerCase()) > -1){
+    //                 markers()[i].show(true);
+    //                 markers()[i].setMap(null);
+    //                 // markers[i].setVisible(true);
+    //                 console.log(markers()[i].title);
+    //               }
+    //             else{
+    //                 markers()[i].show(false);
+    //                 // markers[i].setVisible(false);
+    //             }
+    //         }
+    //     }
+    //     largeInfowindow.close();
+    // };
 
-//     this.showAll = function(variable){
-//         for(i=0; i<markers().length; i++){
-//             markers()[i].show(variable);
-//             // markers[i].setVisible(variable);
-//             console.log("hooi");
-//         }
-//     };
+    // this.showAll = function(variable){
+    //     for(i=0; i<markers().length; i++){
+    //         markers()[i].show(variable);
+    //         // markers[i].setVisible(variable);
+    //         console.log("hooi");
+    //     }
+    // };
+
+
+
+
+
+
+
+
+
+
 
     var searchTerm = ko.observableArray();
 
@@ -240,11 +261,13 @@ this.filteredList = ko.computed(function() {
 
 
 
-
-
-
-
-
-
 };
-ko.applyBindings();
+
+
+
+
+
+
+
+
+
