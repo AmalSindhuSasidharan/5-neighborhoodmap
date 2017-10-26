@@ -180,9 +180,9 @@ this.listclick=function (marker){
 // console.log(markers()[1].title);
 // console.log(markers()[1].visible());
 
-for (var i = 0; i < markers().length; i++) {
-    console.log(markers()[i].visible());
-}
+// for (var i = 0; i < markers().length; i++) {
+//     console.log(markers()[i].visible());
+// }
 
 
 
@@ -235,28 +235,44 @@ for (var i = 0; i < markers().length; i++) {
 
 
 
-    var searchTerm = ko.observable("");
+    // var searchTerm = ko.observable("");
 
-// // this.searchTerm = ko.observable("");
 
+
+// this.filteredList = ko.computed(function() {
+//     var filter =searchTerm().toString().toLowerCase();
+//     if (!filter) {
+//         markers().forEach(function(locationItem){
+//             locationItem.visible(true);
+//             });
+//         return markers();
+//     } else {
+//         return ko.utils.arrayFilter(this.markers(), function(locationItem) {
+//             var string = locationItem.title.toLowerCase();
+//             var result = (string.search(filter) >= 0);
+//             locationItem.visible(result);
+//             console.log(locationItem.visible());
+//             return result;
+//         });
+//     }
+// }, this);
+
+// // for (var i = 0; i < this.filteredList().length; i++) {
+
+// //     console.log(this.filteredList()[i].visible());
+// // }
+
+this.searchTerm=ko.observable("");
 this.filteredList = ko.computed(function() {
-    var filter =searchTerm().toString().toLowerCase();
+    var filter =this.searchTerm().toLowerCase();
     if (!filter) {
-        markers().forEach(function(locationItem){
-            locationItem.visible(true);
-            });
         return markers();
     } else {
-        return ko.utils.arrayFilter(this.markers(), function(locationItem) {
-            var string = locationItem.title.toLowerCase();
-            var result = (string.search(filter) >= 0);
-            locationItem.visible(result);
-            console.log(locationItem.visible());
-            return result;
+        return ko.utils.arrayFilter(this.items(), function(item) {
+            return ko.utils.stringStartsWith(item.name().toLowerCase(), filter);
         });
     }
 }, this);
-//     console.log(ViewModel.filteredList());
 
 
 
