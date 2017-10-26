@@ -1,58 +1,40 @@
 var locations=[
                 {
                     title:"Hill Palace Museum",
-                    location:{lat:9.9526386,lng:76.3639139},
-                    show: true,
-                    visible:true
+                    location:{lat:9.9526386,lng:76.3639139}
                  },
                  {
                     title:"Hindutemple Sree Poornathrayeesa temple",
-                    location:{lat:9.9450109,lng:76.342111},
-                    show: true,
-                    visible:true
+                    location:{lat:9.9450109,lng:76.342111}
 
                  },
                  {
                     title:"RLV College of Fine Arts",
-                    location:{lat:9.9422187,lng:76.3449798},
-                    show: true,
-                    visible:true
+                    location:{lat:9.9422187,lng:76.3449798}
                  },
                  {
                     title:"Vegetarisches Sree Saravana Bhavan",
-                    location:{lat:9.9533481,lng:76.3408252},
-                    show: true,
-                    visible:true
+                    location:{lat:9.9533481,lng:76.3408252}
                  },
                  {
                     title:"Govt. Ayurveda Hospital",
-                    location:{lat:9.9248246,lng:76.3586416},
-                    show: true,
-                    visible:true
+                    location:{lat:9.9248246,lng:76.3586416}
                  },
                  {
                     title:"Vyttila Mobility Hub",
-                    location:{lat:9.9686167,lng:76.3214095},
-                    show: true,
-                    visible:true
+                    location:{lat:9.9686167,lng:76.3214095}
                  },
                  {
                     title:"State Bank Of India",
-                    location:{lat:9.9518318,lng:76.3404544},
-                    show: true,
-                    visible:true
+                    location:{lat:9.9518318,lng:76.3404544}
                  },
                  {
                     title:"Wonderla",
-                    location:{lat:10.027077,lng:76.39163},
-                    show: true,
-                    visible:true
+                    location:{lat:10.027077,lng:76.39163}
                  },
                  {
                     title:"LuLu Mall",
-                    location:{lat:10.0270753,lng:76.3080901},
-                    show: true,
-                    visible:true
+                    location:{lat:10.0270753,lng:76.3080901}
                  }
 
                  ];
@@ -133,6 +115,7 @@ function makeMarkerIcon(markerColor) {
      animation: google.maps.Animation.DROP,
      icon: defaultIcon,
      id: i,
+     visible:true
      // visible:true
 
 
@@ -192,7 +175,10 @@ this.listclick=function (marker){
 
 };
 
-console.log(markers()[0]);
+console.log(markers()[0].title);
+
+console.log(markers()[1].title);
+
 console.log(markers());
 
 
