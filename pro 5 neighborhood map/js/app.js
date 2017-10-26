@@ -175,11 +175,19 @@ this.listclick=function (marker){
 
 };
 
-console.log(markers()[0].title);
+// console.log(markers()[0].title);
+// console.log(markers()[0].visible());
+// console.log(markers()[1].title);
+// console.log(markers()[1].visible());
 
-console.log(markers()[1].title);
+for (var i = 0; i < markers().length; i++) {
+    console.log(markers()[i].visible());
+}
 
-console.log(markers());
+
+
+
+// console.log(markers());
 
 
     // // function for search bar
@@ -227,27 +235,27 @@ console.log(markers());
 
 
 
-//     var searchTerm = ko.observableArray();
+    var searchTerm = ko.observable("");
 
 // // this.searchTerm = ko.observable("");
 
-// ViewModel.filteredList = ko.computed(function() {
-//     var filter =searchTerm().toString().toLowerCase();
-//     if (!filter) {
-//         markers().forEach(function(locationItem){
-//             locationItem.visible(true);
-//             });
-//         return markers();
-//     } else {
-//         return ko.utils.arrayFilter(this.markers(), function(locationItem) {
-//             var string = locationItem.title.toLowerCase();
-//             var result = (string.search(filter) >= 0);
-//             locationItem.visible(result);
-//             console.log(locationItem.visible);
-//             return result;
-//         });
-//     }
-// }, ViewModel);
+this.filteredList = ko.computed(function() {
+    var filter =searchTerm().toString().toLowerCase();
+    if (!filter) {
+        markers().forEach(function(locationItem){
+            locationItem.visible(true);
+            });
+        return markers();
+    } else {
+        return ko.utils.arrayFilter(this.markers(), function(locationItem) {
+            var string = locationItem.title.toLowerCase();
+            var result = (string.search(filter) >= 0);
+            locationItem.visible(result);
+            console.log(locationItem.visible());
+            return result;
+        });
+    }
+}, this);
 //     console.log(ViewModel.filteredList());
 
 
