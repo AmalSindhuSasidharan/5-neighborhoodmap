@@ -41,7 +41,7 @@ var locations=[
 
 
 
-                      var markers = ko.observableArray();
+
 
 
 
@@ -70,7 +70,7 @@ var initMap=function(){
 
 
 
-
+                      var markers = ko.observableArray();
 
 
 
@@ -114,11 +114,8 @@ function makeMarkerIcon(markerColor) {
      title: title,
      animation: google.maps.Animation.DROP,
      icon: defaultIcon,
-     id: i,
-     visible:true
+     id: i
      // visible:true
-
-
 
           });
    marker.visible = ko.observable(true);
