@@ -54,23 +54,37 @@
             <div class="col-md-4">
              <div><strong>NEIGHBORHOOD MAP</strong></div><br><br>
              <div>
-             <div>
-                <!--  <input type="text" placeholder="search here please...." data-bind="value:this.inputText, valueUpdate: 'afterkeydown',event:{keyup:this.filtersearch}">
-                 </div>
- -->
+
+
+<!--              <div>
+                 <input type="text" placeholder="search here please...." data-bind="value:this.inputText, valueUpdate: 'afterkeydown',event:{keyup:this.filtersearch}">
+                 </div> -->
 
 
 
-                 <input type="text" placeholder="search here please...." data-bind="textInput:ViewModel.searchTerm, valueUpdate: 'afterkeydown'">
-             </div>
-             <!-- <div data-bind="foreach:markers">
-                <div data-bind="text:title"></div>
-                <br>
-            </div> -->
-            <div data-bind="foreach:this.filteredList">
-                <div data-bind="text:title,click:this.listclick"></div>
+<!--                needed part down                 -->
+                <!--  <input type="text" placeholder="search here please...." data-bind="textInput:ViewModel.searchTerm, valueUpdate: 'afterkeydown'">
+             </div> -->
+<!--                      needed part up      -->
+
+
+
+             <div data-bind="foreach:markers">
+                <div data-bind="text:title,click:$parent.listclick"></div>
                 <br>
             </div>
+
+
+
+                      <!-- needed part down -->
+            <!-- <div data-bind="foreach:this.filteredList">
+                <div data-bind="text:title,click:this.listclick"></div>
+                <br>
+            </div> -->
+                        <!-- needed part up -->
+
+
+
             </div>
         </div>
 

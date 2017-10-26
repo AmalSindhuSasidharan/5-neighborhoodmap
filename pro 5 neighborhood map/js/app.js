@@ -59,6 +59,10 @@ var locations=[
 
 
 
+                      var markers = ko.observableArray();
+
+
+
 
 
 
@@ -93,7 +97,7 @@ var ViewModel =function() {
 
     var self=this;
 
-     var markers = ko.observableArray();
+
 
      var largeInfowindow = new google.maps.InfoWindow();
 
@@ -155,7 +159,7 @@ function makeMarkerIcon(markerColor) {
             this.setIcon(defaultIcon);
         });
 
-
+// console.log(marker);
 }
 
 
@@ -182,7 +186,7 @@ function populateInfoWindow(marker, infowindow) {
 
             }
 };
-function listclick(marker){
+this.listclick=function (marker){
     populateInfoWindow(marker, largeInfowindow);
     makeBounce(marker);
 
@@ -237,28 +241,28 @@ console.log(markers());
 
 
 
-    var searchTerm = ko.observableArray();
+//     var searchTerm = ko.observableArray();
 
-// this.searchTerm = ko.observable("");
+// // this.searchTerm = ko.observable("");
 
-ViewModel.filteredList = ko.computed(function() {
-    var filter =searchTerm().toString().toLowerCase();
-    if (!filter) {
-        markers().forEach(function(locationItem){
-            locationItem.visible(true);
-            });
-        return markers();
-    } else {
-        return ko.utils.arrayFilter(this.markers(), function(locationItem) {
-            var string = locationItem.title.toLowerCase();
-            var result = (string.search(filter) >= 0);
-            locationItem.visible(result);
-            console.log(locationItem.visible);
-            return result;
-        });
-    }
-}, ViewModel);
-    console.log(ViewModel.filteredList());
+// ViewModel.filteredList = ko.computed(function() {
+//     var filter =searchTerm().toString().toLowerCase();
+//     if (!filter) {
+//         markers().forEach(function(locationItem){
+//             locationItem.visible(true);
+//             });
+//         return markers();
+//     } else {
+//         return ko.utils.arrayFilter(this.markers(), function(locationItem) {
+//             var string = locationItem.title.toLowerCase();
+//             var result = (string.search(filter) >= 0);
+//             locationItem.visible(result);
+//             console.log(locationItem.visible);
+//             return result;
+//         });
+//     }
+// }, ViewModel);
+//     console.log(ViewModel.filteredList());
 
 
 
