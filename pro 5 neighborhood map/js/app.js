@@ -3,14 +3,16 @@ var locations = [{
     location: {
       lat: 9.9526386,
       lng: 76.3639139
-    }
+    },
+    id:'4dcb88f045dd38312287413e'
   },
   {
     title: "Hindutemple Sree Poornathrayeesa temple",
     location: {
       lat: 9.9450109,
       lng: 76.342111
-    }
+    },
+    id:'4bf894124a67c9284cb725cf'
 
   },
   {
@@ -18,49 +20,54 @@ var locations = [{
     location: {
       lat: 9.9422187,
       lng: 76.3449798
-    }
+    },
+    id:'4d3401d82c76a1436cbb80c7'
   },
   {
     title: "Vegetarisches Sree Saravana Bhavan",
     location: {
       lat: 9.9533481,
       lng: 76.3408252
-    }
+    },
+    id:'54031e63498e50e6e1f2db8f'
   },
-  {
-    title: "Govt. Ayurveda Hospital",
-    location: {
-      lat: 9.9248246,
-      lng: 76.3586416
-    }
-  },
+  // {
+  //   title: "Govt. Ayurveda Hospital",
+  //   location: {
+  //     lat: 9.9248246,
+  //     lng: 76.3586416
+  //   }
+  // },
   {
     title: "Vyttila Mobility Hub",
     location: {
       lat: 9.9686167,
       lng: 76.3214095
-    }
+    },
+    id:'4eae33d8f5b936710bcd2558'
   },
-  {
-    title: "State Bank Of India",
-    location: {
-      lat: 9.9518318,
-      lng: 76.3404544
-    }
-  },
+  // {
+  //   title: "State Bank Of India",
+  //   location: {
+  //     lat: 9.9518318,
+  //     lng: 76.3404544
+  //   }
+  // },
   {
     title: "Wonderla",
     location: {
       lat: 10.027077,
       lng: 76.39163
-    }
+    },
+    id:'4f9246eee4b02d470255e414'
   },
   {
     title: "LuLu Mall",
     location: {
       lat: 10.0270753,
       lng: 76.3080901
-    }
+    },
+    id:'514818dee4b0efe8086c19c2'
   }
 
 ];
@@ -111,6 +118,7 @@ var ViewModel = function() {
   for (var i = 0; i < locations.length; i++) {
     var position = locations[i].location;
     var title = locations[i].title;
+    var id=locations[i].id;
 
     var marker = new google.maps.Marker({
       map: map,
@@ -118,11 +126,12 @@ var ViewModel = function() {
       title: title,
       animation: google.maps.Animation.DROP,
       icon: defaultIcon,
-      id: i
+      rating:'',
+      id: id
       // visible:true
 
     });
-    marker.visible = ko.observable(true);
+    // marker.visible = ko.observable(true);
 
 
 
@@ -157,11 +166,49 @@ var ViewModel = function() {
   };
 
 
+
+
+
+
+  // adding 3rd party functionality...ie, foursquare for displaying rating of each Place
+// get rating for each marker
+        markers().forEach(function(mar){
+            // passing m for marker
+            $.ajax({
+                method: 'GET',
+                dataType: "json",
+                url: "https://api.foursquare.com/v2/venues/" + mar.id + "?client_id=BSFHXUHVRPZHLMNLZOWAADA2KP03CNT1QKZTZFPD1RXU215V&client_secret=XBYGT3W2T1WKEREYFY01AJJRLK5XXMWX5O2POUJHXJNNFRMW&v=20170303",
+                success: function(data){ // if data is successfully fetch than function will execute
+                    var venue = data.response.venue;
+                    // var imgurl = data.response.venue.photos.groups[0].items[0];
+                    if ((venue.hasOwnProperty('rating')) ) {
+                        mar.rating = venue.rating;
+                        // m.image = imgurl.prefix + "100x100" + imgurl.suffix;
+                    }
+                    else{
+                        mar.rating = '';
+                        // m.imgurl = '';
+                    }
+                },
+                 error: function(e) { //if any error occur in fetching data
+                alert('There is some error in fetching data');
+            }
+            });
+        });
+
+
+
+
+
+
+
+  // show infowindow when marker is selected
   function populateInfoWindow(marker, infowindow) {
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker != marker) {
       infowindow.marker = marker;
-      infowindow.setContent('<div>' + marker.title + '</div>');
+      infowindow.setContent('<div>'+'<h3>' + marker.title +'</h3>'+"<h4>Ratings:" + marker.rating + '</h4>'+'</div>');
+      // infowindow.setContent('<div>' +'<h3>' + marker.title +'</h3>'+'</div>');
       infowindow.open(map, marker);
 
       // Make sure the marker property is cleared if the infowindow is closed.
