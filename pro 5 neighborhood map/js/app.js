@@ -127,6 +127,7 @@ var ViewModel = function() {
       animation: google.maps.Animation.DROP,
       icon: defaultIcon,
       rating:'',
+      image: '',
       id: id
       // visible:true
 
@@ -178,16 +179,16 @@ var ViewModel = function() {
                 method: 'GET',
                 dataType: "json",
                 url: "https://api.foursquare.com/v2/venues/" + mar.id + "?client_id=BSFHXUHVRPZHLMNLZOWAADA2KP03CNT1QKZTZFPD1RXU215V&client_secret=XBYGT3W2T1WKEREYFY01AJJRLK5XXMWX5O2POUJHXJNNFRMW&v=20170303",
-                success: function(data){ // if data is successfully fetch than function will execute
+                success: function(data){ // if data is successfully fetch function will execute
                     var venue = data.response.venue;
-                    // var imgurl = data.response.venue.photos.groups[0].items[0];
-                    if ((venue.hasOwnProperty('rating')) ) {
+                    var imgurl = data.response.venue.photos.groups[0].items[0];
+                    if ((venue.hasOwnProperty('rating')) || ((imgurl.hasOwnProperty('prefix')) && (imgurl.hasOwnProperty('suffix')))) {
                         mar.rating = venue.rating;
-                        // m.image = imgurl.prefix + "100x100" + imgurl.suffix;
+                        mar.image = imgurl.prefix + "100x100" + imgurl.suffix;
                     }
                     else{
                         mar.rating = '';
-                        // m.imgurl = '';
+                        mar.imgurl = '';
                     }
                 },
                  error: function(e) { //if any error occur in fetching data
@@ -207,7 +208,7 @@ var ViewModel = function() {
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker != marker) {
       infowindow.marker = marker;
-      infowindow.setContent('<div>'+'<h3>' + marker.title +'</h3>'+"<h4>Ratings:" + marker.rating + '</h4>'+'</div>');
+      infowindow.setContent('<div>'+'<h3>' + marker.title +'</h3>'+"<h4>Ratings:" + marker.rating + '</h4>'+'</div><div><img src="' + marker.image + '"></div>');
       // infowindow.setContent('<div>' +'<h3>' + marker.title +'</h3>'+'</div>');
       infowindow.open(map, marker);
 
