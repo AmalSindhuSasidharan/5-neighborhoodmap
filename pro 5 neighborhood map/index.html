@@ -1,109 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js"></script>
-       <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/lib/knockout-3.2.0.js"></script>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/lib/knockout-3.2.0.js"></script>
 
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
+  <style>
+    html,
+    body {
+      font-family: Arial, sans-serif;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-
-<style>
-
-      html,
-      body {
-        font-family: Arial, sans-serif;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      .container {
-        height: 100%;
-        position: relative;
-      }
+    .container {
+      height: 100%;
+      position: relative;
+    }
 
     #mapview {
-        bottom:0px;
-        height: 100%;
-        left: 300px;
-        position: absolute;
-        right: 0px;
-      }
-/*      hr {
-        background: #D0D7D9;
-        height: 1px;
-        margin: 20px 0 20px 0;
-        border: none;
-      }*/
+      bottom: 0px;
+      height: 100%;
+      left: 300px;
+      position: absolute;
+      right: 0px;
+    }
 
-</style>
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="row">
+  <div class="container">
+    <div class="row">
 
-            <div class="col-md-8" id="mapview" style="width: 100%; height: 100%;position: absolute;">
-            </div>
-
-
-            <div class="col-md-4">
-             <div><strong>NEIGHBORHOOD MAP</strong></div><br><br>
-             <div>
+      <div class="col-md-8" id="mapview" style="width: 100%; height: 100%;position: absolute;">
+      </div>
 
 
-<!--              <div>
-                 <input type="text" placeholder="search here please...." data-bind="value:this.inputText, valueUpdate: 'afterkeydown',event:{keyup:this.filtersearch}">
-                 </div> -->
-                 <div>
-                     <input type="text" placeholder="search here please...." data-bind="textInput:ViewModel.searchTerm,valueUpdate: 'afterkeydown'">
-                 </div>
+      <div class="col-md-4">
+        <div><strong>NEIGHBORHOOD MAP</strong></div><br><br>
+        <div>
+          <div>
+            <input type="text" placeholder="search here please...." data-bind="textInput: searchTerm">
+          </div>
+          <div data-bind="foreach:filteredList">
+            <div data-bind="text:title,click:$parent.listclick"></div>
+            <br>
+          </div>
 
-
-
-<!--                needed part down                 -->
-                <!--  <input type="text" placeholder="search here please...." data-bind="textInput:ViewModel.searchTerm, valueUpdate: 'afterkeydown'">
-             </div> -->
-<!--                      needed part up      -->
-
-
-
-             <div data-bind="foreach:filteredList">
-                <div data-bind="text:title,click:$parent.listclick"></div>
-                <br>
-            </div>
-
-
-
-                      <!-- needed part down -->
-            <!-- <div data-bind="foreach:this.filteredList">
-                <div data-bind="text:title,click:this.listclick"></div>
-                <br>
-            </div> -->
-                        <!-- needed part up -->
-
-
-
-            </div>
         </div>
+      </div>
 
     </div>
 
-
-
-
-
-
-
-    <script async defer
-        src=
-        "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyDiKFNMFScgAJmrCx5mX8r4WMHMzelMa00&v=3&callback=initMap">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyDiKFNMFScgAJmrCx5mX8r4WMHMzelMa00&v=3&callback=initMap">
     </script>
-        <script src="js/app.js"></script>
+    <script src="js/app.js"></script>
 
 </body>
+
 </html>
