@@ -111,7 +111,7 @@ var ViewModel = function() {
             new google.maps.Point(10, 34),
             new google.maps.Size(21, 34));
         return markerImage;
-    };
+    }
 
 
 
@@ -133,12 +133,13 @@ var ViewModel = function() {
 
         });
         // marker.visible = ko.observable(true);
-
-
-
-
         markers.push(marker);
+    }
 
+
+
+
+    markers().forEach(function(marker) {
         // Create an onclick event to open the large infowindow at each marker and make it bounce .
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
@@ -153,8 +154,9 @@ var ViewModel = function() {
             this.setIcon(defaultIcon);
         });
 
-        // console.log(marker);
-    }
+    });
+
+
 
 
     // bounce marker when click on it
@@ -164,7 +166,7 @@ var ViewModel = function() {
         setTimeout(function() {
             marker.setAnimation(null);
         }, 700);
-    };
+    }
 
 
 
@@ -172,7 +174,7 @@ var ViewModel = function() {
     // adding 3rd party functionality...ie, foursquare for displaying rating of each Place
     // get rating for each marker
     markers().forEach(function(mar) {
-        // passing m for marker
+        // passing mar for marker
         $.ajax({
             method: 'GET',
             dataType: "json",
@@ -213,7 +215,7 @@ var ViewModel = function() {
 
 
         }
-    };
+    }
     this.listclick = function(marker) {
         populateInfoWindow(marker, largeInfowindow);
         makeBounce(marker);
@@ -228,7 +230,7 @@ var ViewModel = function() {
         } else {
             return ko.utils.arrayFilter(markers(), function(item) {
                 var itIsAMatch = item.title.toLowerCase().indexOf(filter) > -1; // true or false
-                item.setVisible(itIsAMatch)
+                item.setVisible(itIsAMatch);
                 return itIsAMatch;
             });
         }
