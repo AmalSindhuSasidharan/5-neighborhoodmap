@@ -182,11 +182,9 @@ var ViewModel = function() {
             success: function(data) { // if data is successfully fetch function will execute
                 var venue = data.response.venue;
                 var imgurl = data.response.venue.photos.groups[0].items[0];
-                if ((venue.hasOwnProperty('rating')) || ((imgurl.hasOwnProperty('prefix')) && (imgurl.hasOwnProperty('suffix')))) {
-                    mar.rating = venue.rating;
+                if ( ((imgurl.hasOwnProperty('prefix')) && (imgurl.hasOwnProperty('suffix')))) {
                     mar.image = imgurl.prefix + "100x100" + imgurl.suffix;
                 } else {
-                    mar.rating = '';
                     mar.imgurl = '';
                 }
             },
@@ -204,7 +202,7 @@ var ViewModel = function() {
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker != marker) {
             infowindow.marker = marker;
-            infowindow.setContent('<div>' + '<h3>' + marker.title + '</h3>' + "<h4>Ratings:" + marker.rating + '</h4>' + '</div><div><img src="' + marker.image + '"></div>');
+            infowindow.setContent('<div>' + '<h3>' + marker.title + '</h3></div><div><img src="' + marker.image + '"></div>');
             // infowindow.setContent('<div>' +'<h3>' + marker.title +'</h3>'+'</div>');
             infowindow.open(map, marker);
 
@@ -223,10 +221,21 @@ var ViewModel = function() {
     };
 
     this.searchTerm = ko.observable("");
+this.filterSearch=function(){
+    if(this.searchTerm().lenth===0){
+        markers().forEach(function(marker) {
+            marker.setVisible(true);
+        });
+    }
+}
+
+
     this.filteredList = ko.computed(function() {
         var filter = this.searchTerm().toLowerCase();
         if (!filter) {
+            markers().forEach(function(marker){marker.setVisible(true)});
             return markers();
+
         } else {
             return ko.utils.arrayFilter(markers(), function(item) {
                 var itIsAMatch = item.title.toLowerCase().indexOf(filter) > -1; // true or false
@@ -239,6 +248,5 @@ var ViewModel = function() {
 };
 
 function googleError() {
-    ViewModel.showMapMessage(true);
     alert("google not loaded");
 }
